@@ -1,0 +1,17 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:wght@500&display=swap');
+
+@import "tailwindcss";
+.placeholder-color{
+   color: #e0e0e0;
+   font-weight: 300;
+}
+*{
+    font-family: "Poppins", sans-serif;
+
+}
+.reset-tw, .reset-tw *{
+all:revert !important
+}
+
+
