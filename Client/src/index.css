@@ -6,12 +6,67 @@
    color: #e0e0e0;
    font-weight: 300;
 }
+body {
+  background-color: #050505; /* Your deep black background */
+  color: white;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
 *{
     font-family: "Poppins", sans-serif;
 
 }
-.reset-tw, .reset-tw *{
+/*.reset-tw, .reset-tw *{
 all:revert !important
+}*/
+
+@plugin "@tailwindcss/typography";
+@theme {
+  --color-glass-white: rgba(255, 255, 255, 0.05);
+  --color-glass-border: rgba(255, 255, 255, 0.1);
 }
 
+/* Custom Glassmorphism Utility */
+.glass-card {
+  background: var(--color-glass-white);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-glass-border);
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
 
+/* Animated Background Mesh */
+.bg-mesh {
+  background-color: #0a0a0c;
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(225,39%,30%,0.3) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, hsla(339,49%,30%,0.3) 0, transparent 50%);
+}
+
+/* Smooth Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Entrance Animation for Cards */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out forwards;
+}

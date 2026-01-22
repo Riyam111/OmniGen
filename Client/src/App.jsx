@@ -20,11 +20,10 @@ import Community from './pages/Community'
 const App = () => {
   const {showLogin}=useContext(AppContext)
   return (
-    <div className='px-4 sm:px-10 md:px-14 lg:px-28 min-h-screen
-    bg-gradient-to-b from-blue-50 via-indigo-50 to-purple-100'
+    <div className="min-h-screen relative"
 >
   <ToastContainer position='bottom-right'/>
-  <Navbar/>
+  
   {showLogin&&<Login/>}
       <Routes>
         <Route path='/'element={ <Home/>}/>
@@ -39,10 +38,15 @@ const App = () => {
           <Route path='community'element={ <Community/>}/>
         </Route>
          
-          <Route path='/buy'element={<BuyCredit/>}/>
+          <Route path='/buy'element={
+            <div className='px-4 sm:px-10 md:px-14 lg:px-28'>
+            <Navbar />
+            <BuyCredit />
+            <Footer />
+          </div>}/>
 
       </Routes>
-      <Footer/>
+      
     
     </div>
   )

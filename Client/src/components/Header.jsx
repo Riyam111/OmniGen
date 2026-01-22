@@ -1,102 +1,107 @@
 import React, { useContext } from 'react'
 import { assets } from '../assets/assets'
-import { motion } from "motion/react"
+import { motion } from "framer-motion" // Use standard framer-motion
 import { AppContext } from '../context/AppContext'
 import { useNavigate } from 'react-router-dom'
-const Header = () => {
-  const {user,setShowLogin}=useContext(AppContext)
-  const navigate=useNavigate()
-  const onClickHandler=()=>{
-if(user){
-  navigate('/ai')
-}
-else{
-  setShowLogin(true)
-}
-  }
-  return (
-    <motion.div className="flex flex-col items-center text-center px-4 mt-16 sm:mt-24
-    "initial={{opacity:0.2,y:100}} transition={{duration:1}}
-    whileInView={{opacity:1,y:0}}
-    viewport={{once:true}}>
+import { Sparkles } from 'lucide-react'
 
-      {/* Badge */}
-      <motion.div className="flex items-center gap-2 bg-white/80 backdrop-blur
-        px-5 py-1.5 rounded-full border border-neutral-300 shadow-sm
-        text-sm sm:text-base text-gray-600"
-        initial={{opacity:0,y:-20}} 
-    animate={{opacity:1,y:0}}
-    transition={{delay:0.2,duration:0.8}}
+const Header = () => {
+  const { user, setShowLogin } = useContext(AppContext)
+  const navigate = useNavigate()
+
+  const onClickHandler = () => {
+    if (user) navigate('/ai')
+    else setShowLogin(true)
+  }
+
+  return (
+    <motion.div 
+      className="flex flex-col items-center text-center px-4 mt-16 sm:mt-24"
+      initial={{ opacity: 0, y: 40 }} 
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
     >
-        <span>Create amazing content with AI tools</span>
-        <img src={assets.star_icon} className="w-4 sm:w-5" alt="" />
+      {/* Badge: Glassmorphic with subtle pulse */}
+      <motion.div 
+        className="flex items-center gap-2 bg-white/5 backdrop-blur-md px-5 py-2 rounded-full border border-white/10 shadow-2xl text-xs sm:text-sm text-purple-300 mb-6"
+        initial={{ opacity: 0, scale: 0.9 }} 
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.2 }}
+      >
+        <Sparkles className="w-3.5 h-3.5" />
+        <span className="font-semibold uppercase tracking-widest">The Future of Content Creation</span>
+        <img src={assets.star_icon} className="w-4 h-4" alt="" />
       </motion.div>
 
-      {/* Heading */}
-      <motion.h1 className="mt-8 text-3xl sm:text-6xl lg:text-7xl
-        font-extrabold leading-tight max-w-[320px] sm:max-w-[620px]
-        bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
-        bg-clip-text text-transparent"
-        initial={{opacity:0}}
-        animate={{opacity:1}}
-        transition={{delay:0.4,duration:2}}>
-        Turn prompts into outcomes.
+      {/* Heading: High Contrast Gradient */}
+      <motion.h1 
+        className="text-4xl sm:text-7xl lg:text-8xl font-bold leading-[1.1] max-w-4xl tracking-tight"
+        initial={{ opacity: 0, filter: "blur(10px)" }}
+        animate={{ opacity: 1, filter: "blur(0px)" }}
+        transition={{ delay: 0.4, duration: 1 }}
+      >
+        Turn prompts into <br />
+        <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+          outcomes.
+        </span>
       </motion.h1>
 
-      {/* Optional sub text */}
-      <motion.p className="mt-4 text-sm sm:text-lg text-gray-500 max-w-[280px] sm:max-w-[520px]"
-      initial={{opacity:0,y:20}}
-        animate={{opacity:1,y:0}}
-        transition={{delay:0.6,duration:0.8}}>
-        Describe your need and get AI-powered results fast.
+      {/* Subtext: Softer contrast for readability */}
+      <motion.p 
+        className="mt-6 text-base sm:text-xl text-gray-400 max-w-2xl leading-relaxed"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6, duration: 1 }}
+      >
+        Experience the power of OmniGen. Describe your creative vision and watch AI generate high-fidelity results in seconds.
       </motion.p>
-<motion.button onClick={onClickHandler}
-  className="
-    group mt-8
-    flex items-center gap-2
-    px-8 sm:px-12 py-2.5 sm:py-3
-    text-sm sm:text-lg font-medium text-white
-    rounded-full
-    bg-gradient-to-r from-black via-gray-900 to-black
-    shadow-lg
-    hover:shadow-xl
-    hover:scale-105
-    transition-all duration-300
-    active:scale-95
-  "
-initial={{opacity:0}}
-animate={{opacity:1}}
-transition={{default:{duration:0.5},opacity:{delay:0.8,duration:1}}}
->
-  Start creating now
-  <img
-    src={assets.star_group}
-    alt=""
-    className="
-      h-5 sm:h-6
-      transition-transform duration-300
-      group-hover:rotate-12
-    "
-  />
-</motion.button>
-<motion.div
- initial={{opacity:0}}
-        animate={{opacity:1}}
-        transition={{delay:1,duration:1}}
-className='flex flex-wrap justify-center mt-16 gap-3'>
-  {Array(6).fill('').map((item,index)=>(
-<motion.img
-whileHover={{scale:1.05,duration:0.1}}
-className='rounded hover:scale-105 transition-all duration-300 cursor-pointer max-sm:w-10' src={index%2===0?assets.sample_img_1:assets.sample_img_2} alt='' key={index} width={70}/>
-  ))}
-</motion.div>
-<motion.p 
- initial={{opacity:0}}
-        animate={{opacity:1}}
-        transition={{delay:1.2,duration:0.8}}
-className='mt-2 text-neutral-600'>
-  Generated images from OmniGen
-</motion.p>
+
+      {/* Primary CTA: High-Contrast White Button */}
+      <motion.button 
+        onClick={onClickHandler}
+        className="group mt-10 flex items-center gap-3 px-10 py-4 text-base sm:text-lg font-bold text-black rounded-2xl bg-white hover:bg-gray-100 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all duration-300 active:scale-95"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8 }}
+      >
+        Start Creating Now
+        <img
+          src={assets.star_group}
+          alt=""
+          className="h-5 sm:h-6 transition-transform duration-500 group-hover:rotate-[360deg]"
+        />
+      </motion.button>
+
+      {/* Sample Showcase: Floating Animation */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 1 }}
+        className='flex flex-wrap justify-center mt-20 gap-4'
+      >
+        {Array(6).fill('').map((_, index) => (
+          <motion.div
+            key={index}
+            whileHover={{ y: -10, scale: 1.05 }}
+            className="p-1.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm transition-all"
+          >
+            <img
+              src={index % 2 === 0 ? assets.sample_img_1 : assets.sample_img_2}
+              alt='Sample'
+              className='rounded-xl cursor-pointer w-[60px] sm:w-[85px] h-[60px] sm:h-[85px] object-cover'
+            />
+          </motion.div>
+        ))}
+      </motion.div>
+
+      <motion.p 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 }}
+        className='mt-6 text-sm font-medium text-gray-500 tracking-wide uppercase'
+      >
+        Powered by <span className="text-white">OmniGen AI</span>
+      </motion.p>
     </motion.div>
   )
 }

@@ -3,43 +3,53 @@ import { assets } from '../assets/assets'
 
 const Footer = () => {
   return (
-    <div className="
+    <footer className="
       flex flex-col sm:flex-row
       items-center justify-between
-      gap-6
-      py-6 mt-20
-      text-center
+      gap-8
+      py-10 mt-20
+      border-t border-white/5
+      px-4 sm:px-10
     ">
       
-      {/* Logo */}
-      <span className="
-        flex items-center gap-2
-        text-2xl sm:text-3xl
-        font-extrabold tracking-tight
-        cursor-pointer
-      ">
-        <span>🧠</span>
-        <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-          Omni
+      {/* Logo Section */}
+      <div className="flex items-center gap-2 group cursor-pointer">
+        <span className="text-2xl group-hover:rotate-12 transition-transform duration-300">🧠</span>
+        <span className="text-xl sm:text-2xl font-bold tracking-tight">
+          <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            Omni
+          </span>
+          <span className="text-white ml-0.5">Gen</span>
         </span>
-        <span className="text-gray-800">Gen</span>
-      </span>
-
-      {/* Copyright */}
-      <p className="text-sm text-gray-500">
-        © {new Date().getFullYear()} RiyaM.dev. All rights reserved.
-      </p>
-
-      {/* Social Icons */}
-      <div className="flex gap-3">
-        <img src={assets.facebook_icon} alt="Facebook" className="w-8 sm:w-9" />
-        <img src={assets.twitter_icon} alt="Twitter" className="w-8 sm:w-9" />
-        <img src={assets.instagram_icon} alt="Instagram" className="w-8 sm:w-9" />
       </div>
 
-    </div>
+      {/* Copyright */}
+      <p className="text-xs sm:text-sm text-gray-500 font-medium tracking-wide order-3 sm:order-2">
+        © {new Date().getFullYear()} <span className="text-gray-300 hover:text-purple-400 transition-colors cursor-pointer">RiyaM.dev</span>. All rights reserved.
+      </p>
+
+      {/* Social Icons - Fixed Visibility */}
+      <div className="flex gap-4 order-2 sm:order-3">
+        {[
+          { icon: assets.facebook_icon, label: 'Facebook' },
+          { icon: assets.twitter_icon, label: 'Twitter' },
+          { icon: assets.instagram_icon, label: 'Instagram' }
+        ].map((social, index) => (
+          <div 
+            key={index}
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-white/5 border border-white/10 hover:bg-white/20 hover:border-purple-500/50 hover:-translate-y-1 transition-all duration-300 cursor-pointer group"
+          >
+            <img 
+              src={social.icon} 
+              alt={social.label} 
+              className="w-5 brightness-0 invert opacity-60 group-hover:opacity-100 transition-all duration-300" 
+            />
+          </div>
+        ))}
+      </div>
+
+    </footer>
   )
 }
-
 
 export default Footer
